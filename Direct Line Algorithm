@@ -1,0 +1,27 @@
+void DirectLineAlgorithm(HDC hdc, int xs, int ys, int xe, int ye, COLORREF color) {
+    int dx = xe - xs;
+    int dy = ye - ys;
+
+    if (abs(dy) <= abs(dx)) {
+        double slope = (double) dy / dx;
+        if (xs > xe) {
+            std::swap(xs, xe);
+            std::swap(ys, ye);
+        }
+        for (int x = xs; x <= xe; x++) {
+            int y = round(ys + (x - xs) * slope);
+            SetPixel(hdc, x, y, color);
+        }
+
+    } else {
+        double islope = (double) dx / dy;
+        if (ys > ye) {
+            std::swap(xs, xe);
+            std::swap(ys, ye);
+        }
+        for (int y = ys; y <= ye; y++) {
+            int x = round(xs + (y - ys) * islope);
+            SetPixel(hdc, x, y, color);
+        }
+    }
+}
