@@ -1,0 +1,9 @@
+void DrawCircle(HDC hdc, int xc, int yc, int r, COLORREF color) {
+    int x = 0, y = r;
+    draw8pixels(hdc, xc, yc, x, y, color);
+    while (x < y) {
+        x++;
+        y = Round(sqrt(r * r - x * x));
+        draw8pixels(hdc, xc, yc, x, y, color);
+    }
+}
