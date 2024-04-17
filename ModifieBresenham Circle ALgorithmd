@@ -1,0 +1,20 @@
+void DrawCircleBresenham2(HDC hdc, int xc, int yc, int r, COLORREF color) {
+    int x = 0, y = r;
+    int d = 1 - r;
+    int ch1 = 3;
+    int ch2 = -2 * r + 5;
+    draw8pixels(hdc, xc, yc, x, y, color);
+    while (x < y) {
+        if (d < 0) {
+            d += ch1;
+            ch2 += 2;
+        } else {
+            d += ch2;
+            ch2 += 4;
+            y--;
+        }
+        x++;
+        ch1 += 2;
+        draw8pixels(hdc, xc, yc, x, y, color);
+    }
+}
