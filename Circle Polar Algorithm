@@ -1,0 +1,11 @@
+void DrawCirclePolar(HDC hdc, int xc, int yc, int r, COLORREF color) {
+    int x = r, y = 0;
+    draw8pixels(hdc, xc, yc, x, y, color);
+    double theta = 0, dtheta = 1.0 / r;
+    while (x > y) {
+        theta += dtheta;
+        x = Round(r * cos(theta));
+        y = Round(r * sin(theta));
+        draw8pixels(hdc, xc, yc, x, y, color);
+    }
+}
