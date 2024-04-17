@@ -1,0 +1,21 @@
+void floodFill(HDC hdc, int x, int y, COLORREF bc, COLORREF fc) {
+    std::stack<point> s;
+    s.push(point(x, y));
+    while (!s.empty()) {
+        point p = s.top();
+        s.pop();
+        COLORREF c = GetPixel(hdc, p.x, p.y);
+        if (c == bc || c == fc)continue;
+        SetPixel(hdc, p.x, p.y, fc);
+
+        if (GetPixel(hdc, p.x + 1, p.y) != bc && GetPixel(hdc, p.x + 1, p.y) != fc)
+            s.push(point(p.x + 1, p.y));
+        if (GetPixel(hdc, p.x - 1, p.y) != bc && GetPixel(hdc, p.x - 1, p.y) != fc)
+            s.push(point(p.x - 1, p.y));
+        if (GetPixel(hdc, p.x, p.y + 1) != bc && GetPixel(hdc, p.x, p.y + 1) != fc)
+            s.push(point(p.x, p.y + 1));
+        if (GetPixel(hdc, p.x, p.y - 1) != bc && GetPixel(hdc, p.x, p.y - 1) != fc)
+            s.push(point(p.x, p.y - 1));
+    }
+
+}
