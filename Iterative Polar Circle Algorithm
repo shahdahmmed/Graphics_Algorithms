@@ -1,0 +1,13 @@
+void DrawCircleIterativePolar(HDC hdc, int xc, int yc, int r, COLORREF color) {
+    double x = r, y = 0;
+    draw8pixels(hdc, xc, yc, x, y, color);
+    double dtheta = 1.0 / r;
+    double c = cos(dtheta);
+    double s = sin(dtheta);
+    while (x > y) {
+        double temp = x * c - y * s;
+        y = x * s + y * c;
+        x = temp;
+        draw8pixels(hdc, xc, yc, x, y, color);
+    }
+}
